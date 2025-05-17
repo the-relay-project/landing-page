@@ -1,10 +1,12 @@
 'use client'
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Check, ChevronDown, Code, Layers, MessageSquare, Settings, ShoppingCart, Building2, Users, User } from 'lucide-react';
 
-// Hero Section with animated gradient
+import * as React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, ChevronDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Check, Code, Layers, MessageSquare, Settings, ShoppingCart, Building2, Users, User } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
 const Hero = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 100]);
@@ -51,7 +53,10 @@ const Hero = () => {
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-black px-8 py-3 rounded-md font-medium flex items-center justify-center"
+            className={cn(
+              "bg-white text-black px-8 py-3 rounded-md font-medium",
+              "flex items-center justify-center"
+            )}
           >
             Enterprise Solutions
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -59,7 +64,10 @@ const Hero = () => {
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="border border-white bg-transparent px-8 py-3 rounded-md font-medium flex items-center justify-center"
+            className={cn(
+              "border border-white bg-transparent px-8 py-3 rounded-md font-medium",
+              "flex items-center justify-center"
+            )}
           >
             Consumer Platform
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -76,6 +84,7 @@ const Hero = () => {
         <motion.div 
           animate={{ y: [0, 10, 0] }} 
           transition={{ repeat: Infinity, duration: 2 }}
+          className="floating"
         >
           <ChevronDown className="h-8 w-8 text-gray-400" />
         </motion.div>

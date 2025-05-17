@@ -68,7 +68,7 @@
  
 @layer base {
   * {
-    @apply border-border;
+    @apply border-solid border-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -85,18 +85,6 @@
   animation: gradient 8s ease infinite;
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .floating {
   animation-name: floating;
   animation-duration: 3s;
@@ -104,23 +92,6 @@
   animation-timing-function: ease-in-out;
 }
 
-@keyframes floating {
-  0% { transform: translate(0, 0px); }
-  50% { transform: translate(0, 15px); }
-  100% { transform: translate(0, 0px); }
-}
-
 .pulse-glow {
   animation: pulse-glow 2s infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  }
-  50% {
-    opacity: 0.7;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-  }
 }
