@@ -47,27 +47,31 @@ export default function DocsSidebar({ sidebarOpen, setSidebarOpen }: DocsSidebar
         </div>
 
         <nav className="px-4 space-y-8">
-          {DOCUMENTATION_NAV.map((section: { title: boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | Promise<React.AwaitedReactNode> | React.Key | null | undefined; items: { href: string | number | bigint | UrlObject | null | undefined; title: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; }[]; }) => (
+          {DOCUMENTATION_NAV.map((section: { title: string; items: { href: string | number | bigint | UrlObject | null | undefined; title: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; }[]; }) => (
             <div key={section.title}>
               <h5 className="mb-3 text-sm font-semibold text-gray-400 uppercase tracking-wider">
                 {section.title}
               </h5>
               <ul className="space-y-2">
-                {section.items.map((item: { href: string | number | bigint | UrlObject | null | undefined; title: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; }) => (
-                  <li key={item.href}>
-                    <Link 
-                      href={item.href}
-                      className={cn(
-                        "block py-2 px-3 rounded-md text-sm transition-colors",
-                        pathname === item.href 
-                          ? "bg-blue-900/40 text-blue-400"
-                          : "text-gray-300 hover:bg-gray-800 hover:text-white"
-                      )}
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
+                {section.items
+  .filter((item): item is { href: string | UrlObject; title: React.ReactNode } => 
+    typeof item.href === 'string' || typeof item.href === 'object' && item.href !== null)
+  .map((item) => (
+    <li key={typeof item.href === 'string' ? item.href : JSON.stringify(item.href)}>
+      <Link 
+        href={item.href}
+        className={cn(
+          "block py-2 px-3 rounded-md text-sm transition-colors",
+          pathname === item.href 
+            ? "bg-blue-900/40 text-blue-400"
+            : "text-gray-300 hover:bg-gray-800 hover:text-white"
+        )}
+      >
+        {item.title}
+      </Link>
+    </li>
+))}
+
               </ul>
             </div>
           ))}

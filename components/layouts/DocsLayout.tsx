@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import DocsSidebar from '@/components/docs/DocsSidebar';
@@ -14,7 +12,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header children={undefined} />
+      <Header />
 
       <div className="flex-grow flex">
         <DocsSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
